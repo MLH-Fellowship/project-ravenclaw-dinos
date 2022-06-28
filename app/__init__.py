@@ -64,7 +64,7 @@ def get_time_line_post():
 
 @app.route('/api/timeline_post', methods=['DELETE'])
 def delete_time_line_post():
-    if len(TimelinePost.select().order_by(TimelinePost.created_at.desc()) == 0:
+    if len(TimelinePost.select().order_by(TimelinePost.created_at.desc())) == 0:
         return "There are no posts to be deleted at this time\n"
     tmp = TimelinePost.select().order_by(TimelinePost.created_at.desc())[-1]
     TimelinePost.select().order_by(TimelinePost.created_at.desc())[-1].delete_instance()
