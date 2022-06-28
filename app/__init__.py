@@ -50,7 +50,7 @@ def timeline():
         model_to_dict(p)
         for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
     ]
-	  return render_template('timeline.html', title="Timeline", posts=posts)
+    return render_template('timeline.html', title="Timeline", posts=posts)
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
