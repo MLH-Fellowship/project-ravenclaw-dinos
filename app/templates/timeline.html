@@ -1,0 +1,67 @@
+<!-- code modeled after that of another fellow -->
+
+<html lang="en">
+<body>
+
+    <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="./static/styles/timeline.css">
+
+
+<div class="post-box">
+    <h2>Make a Post</h2>
+    <form id="form" class="form">
+      <div class="user-box">
+        <input type="name" name="name" required/>
+        <label>Name</label>
+      </div>
+      <div class="user-box">
+        <input type="email" name="email" required/>
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="content" required/>
+        <label>Text</label>
+      </div>
+      <button>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+        </button>
+    </form>
+
+  </div>
+
+  
+  <div id="container">
+    {% for i in posts %}
+  <div class="content-box">
+    <span class="name">{{ i.name }}</span>
+    <span class="datetime">{{ i.created_at }}</span>
+    <span class="content">{{ i.content }}</span>
+  </div>
+  {% endfor %}
+</div>
+</body>
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(e) {
+        console.log("Submitted")
+        e.preventDefault();
+        const formData = new FormData(form);
+        const payload = new URLSearchParams(formData);
+        fetch('/api/timeline_post', {
+        method: 'POST',
+        body: payload,
+        })
+        .then(res => res.json())
+        .then(data => {console.log(data)
+        window.location.reload();
+        })
+    })
+    
+</script>
+</html>
