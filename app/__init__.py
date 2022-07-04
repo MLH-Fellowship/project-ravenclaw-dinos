@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, request
+import re
+from flask import Flask, render_template, request, Response
 from dotenv import load_dotenv
 from peewee import *
 import datetime
@@ -8,7 +9,11 @@ from playhouse.shortcuts import model_to_dict
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
                      user=os.getenv("MYSQL_USER"),
                      password=os.getenv("MYSQL_PASSWORD"),
                      host=os.getenv("MYSQL_HOST"),
@@ -52,15 +57,38 @@ def timeline():
     ]
     return render_template('timeline.html', title="Timeline", posts=posts)
 
+
+
+
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
+    if 'name' not in request.form or request.form['name'] == '':
+        return Response("Invalid name", status=400)
+    
+    def validate(email):
+        pat = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
+        if re.match(pat,email):
+            return True
+        return False
+
+    if 'email' not in request.form or validate(request.form['email']) == False:
+        return Response("Invalid email", status=400)
+    if 'content' not in request.form or request.form['content'] == '':
+        return Response("Invalid content", status=400)
+    
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
-    
     return model_to_dict(timeline_post)
   
+
+
+
+
+
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
     return {
@@ -69,6 +97,8 @@ def get_time_line_post():
             for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
+
+
 
 @app.route('/api/timeline_post', methods=['DELETE'])
 def delete_time_line_post():
