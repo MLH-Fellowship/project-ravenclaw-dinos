@@ -3,6 +3,5 @@ __pycache__
 *.pyc
 .env
 python3-virtualenv
-curl-test.sh
 flask.sqlite
 .DS_Store

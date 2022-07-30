@@ -57,6 +57,15 @@ a {
 .medium {
     font-weight: 500;
 }
+.pad {
+    padding-top: 32%;
+}
+.section {
+    margin-bottom: 3em;
+}
+.scroll {
+    padding-top: 1.5em;
+}
 
 /* GRID */
 .grid {
@@ -121,16 +130,6 @@ footer {
 .icons:hover {
     opacity: 1;
     transition: 0.28s;
-}
-
-/* HOBBIES */
-.hobby-picture {
-    margin-top: 3em;
-    margin-left: auto;
-    margin-right: auto;
-    height: 15em;
-    width: 15em;
-    border-radius: 100em;
 }
 
 /* RESPONSIVE */
@@ -233,6 +232,17 @@ footer {
         grid-template-columns: auto auto;
         grid-row-gap: 5vw;
         margin-bottom: 3em;
+    }
+    .city {
+        width: 90vw;
+    }
+    .photo {
+        display: block;
+        position: relative;
+        margin-bottom: 1.5em;
+        width: 50%;
+        border-radius: 0.625vw;
+        transition: 0.28s;
     }
     
     /* ABOUT */
