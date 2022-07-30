@@ -1,0 +1,37 @@
+/* TIMELINE */
+.input {
+    padding:8px;
+    display:block;
+    border:none;
+    border-bottom:1px solid #ccc;
+    width:100%;
+    border:1px solid #ccc!important;
+    margin-top:16px!important;
+    margin-bottom:16px!important;
+}
+
+.button {
+    border:none;
+    display:inline-block;
+    padding:0.5% 4%;
+    vertical-align:middle;
+    overflow:hidden;
+    text-decoration:none;
+    color:inherit;
+    background-color:inherit;
+    text-align:center;
+    cursor:pointer;
+    white-space:nowrap;
+    margin-bottom:16px!important;
+    color:#fff!important;
+    background-color:#2196F3!important;
+}
+
+th {
+    text-align: left;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+td, tr {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
